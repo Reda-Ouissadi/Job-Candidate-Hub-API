@@ -33,9 +33,11 @@ public partial class JobCandidateHubContext : DbContext
             entity.Property(e => e.CandidatId).HasColumnName("CANDIDAT_ID");
             entity.Property(e => e.Email)
                 .HasMaxLength(100)
+                .IsRequired()
                 .HasColumnName("EMAIL");
             entity.Property(e => e.FirstName)
                 .HasMaxLength(50)
+                .IsRequired()
                 .IsUnicode(false)
                 .HasColumnName("FIRST_NAME");
             entity.Property(e => e.GithubProfilUrl)
@@ -43,6 +45,7 @@ public partial class JobCandidateHubContext : DbContext
                 .HasColumnName("GITHUB_PROFIL_URL");
             entity.Property(e => e.LastName)
                 .HasMaxLength(50)
+                .IsRequired()
                 .IsUnicode(false)
                 .HasColumnName("LAST_NAME");
             entity.Property(e => e.LinkedinProfilUrl)
@@ -53,6 +56,7 @@ public partial class JobCandidateHubContext : DbContext
                 .HasColumnName("PHONE_NUMBER");
             entity.Property(e => e.TextComment)
                 .HasMaxLength(1000)
+                .IsRequired()
                 .HasColumnName("TEXT_COMMENT");
             entity.Property(e => e.TimeInterval)
                 .HasMaxLength(20)

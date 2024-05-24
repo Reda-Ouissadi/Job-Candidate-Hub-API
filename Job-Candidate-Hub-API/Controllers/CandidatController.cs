@@ -36,12 +36,12 @@ namespace Job_Candidate_Hub_API.Controllers
             }
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Candidat>> GetCandidatById(int id)
+        [HttpGet("{email}")]
+        public async Task<ActionResult<Candidat>> GetCandidatByEmail(string email)
         {
             try
             {
-                var Candidat = await _context.Candidats.FindAsync(id);
+                var Candidat = await CandidatExist(email);
 
                 if (Candidat == null)
                 {
@@ -49,6 +49,36 @@ namespace Job_Candidate_Hub_API.Controllers
                 }
 
                 return Candidat;
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex);
+            }
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<Candidat>> CreateCandidat(Candidat candidat)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                var ExistCandidat = await CandidatExist(candidat.Email);
+
+                if (ExistCandidat != null)
+                {
+                    return await UpdateExistCandidat(ExistCandidat, candidat);
+                }
+
+                await _context.AddAsync(candidat);
+
+                await _context.SaveChangesAsync();
+
+                return Ok("Candidat added successfully");
+
             }
             catch (Exception ex)
             {
@@ -84,36 +114,6 @@ namespace Job_Candidate_Hub_API.Controllers
                 await _context.SaveChangesAsync();
 
                 return Ok("Candidat updated successfully");
-            }
-            catch (Exception ex)
-            {
-                return Ok(ex);
-            }
-        }
-
-        [HttpPost]
-        public async Task<ActionResult<Candidat>> CreateCandidat(Candidat candidat)
-        {
-            try
-            {
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest(ModelState);
-                }
-
-                var ExistCandidat = await CandidatExist(candidat.Email);
-
-                if (ExistCandidat != null)
-                {
-                    return await UpdateExistCandidat(ExistCandidat, candidat);
-                }
-
-                await _context.AddAsync(candidat);
-
-                await _context.SaveChangesAsync();
-
-                return Ok("Candidat added successfully");
-
             }
             catch (Exception ex)
             {

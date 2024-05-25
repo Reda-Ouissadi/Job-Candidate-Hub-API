@@ -16,46 +16,6 @@ namespace Job_Candidate_Hub_API.Controllers
             _context = context;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<List<Candidat>>> GetAllCandidat()
-        {
-            try
-            {
-                var Candidats = await _context.Candidats.ToListAsync();
-
-                if (Candidats == null)
-                {
-                    return NoContent();
-                }
-
-                return Candidats;
-            }
-            catch (Exception ex)
-            {
-                return Ok(ex);
-            }
-        }
-
-        [HttpGet("{email}")]
-        public async Task<ActionResult<Candidat>> GetCandidatByEmail(string email)
-        {
-            try
-            {
-                var Candidat = await CandidatExist(email);
-
-                if (Candidat == null)
-                {
-                    return NotFound();
-                }
-
-                return Candidat;
-            }
-            catch (Exception ex)
-            {
-                return Ok(ex);
-            }
-        }
-
         [HttpPost]
         public async Task<ActionResult<Candidat>> CreateCandidat(Candidat candidat)
         {

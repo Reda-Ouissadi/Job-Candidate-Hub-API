@@ -2,7 +2,9 @@
   
   -> PhoneNumberValidationAttribute : it validate if the Phone Number inserted if it has the correct phone format and not make the column required
   
-  -> UrlLinkValidationAttribute : it validate if the Urls Linkedin & Github inserted if they have the correct url format and not make the column required
+  -> UrlLinkedInValidationAttribute : it validate if the Linkedin Porfile Url is inserted correctly, it must start with https://www.linkedin.com/in/ then whatever profile name it has after it
+  
+  -> UrlLinkedInValidationAttribute : iit validate if the GitHub Porfile Url is inserted correctly, it must start with https://github.com/ then whatever profile name it has after it
 
 - Explanation of the Controller Actions :
     

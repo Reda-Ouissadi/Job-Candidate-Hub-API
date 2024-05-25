@@ -22,10 +22,10 @@ public partial class Candidat
 
     public string? TimeInterval { get; set; }
 
-    [UrlLinkValidation]
+    [UrlLinkedInValidation]
     public string? LinkedinProfilUrl { get; set; }
 
-    [UrlLinkValidation]
+    [UrlGitHubValidation]
     public string? GithubProfilUrl { get; set; }
 
     [Required]

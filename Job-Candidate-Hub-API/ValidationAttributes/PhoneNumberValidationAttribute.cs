@@ -9,7 +9,7 @@ namespace Job_Candidate_Hub_API.ValidationAttributes
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
             var phoneNumber = value as string;
-            var phoneNumberPattern = @"^\+?[1-9]\d{1,14}$";
+            var phoneNumberPattern = @"^\+?[1-9]{1,3}\d{1,14}$";
 
             if (string.IsNullOrEmpty(phoneNumber) || Regex.IsMatch(phoneNumber, phoneNumberPattern))
             {
